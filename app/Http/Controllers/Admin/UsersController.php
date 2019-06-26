@@ -8,16 +8,6 @@ use App\Http\Controllers\Controller;
 class UsersController extends Controller
 {
 
-    public function login()
-    {
-        return view('admin.users.login');
-    }
-
-    public function do_login()
-    {
-
-    }
-
     /**
      * Display a listing of the resource.
      *

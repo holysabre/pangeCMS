@@ -8,6 +8,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
     <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
     <link rel="stylesheet" href="/layuiadmin/style/login.css" media="all">
@@ -22,9 +23,11 @@
             {{--<p>layui 官方出品的单页面后台管理模板系统</p>--}}
         </div>
         <div class="layadmin-user-login-box layadmin-user-login-body layui-form">
+            <form action="{{ route('admin.login') }}" method="post">
+            @csrf
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="LAY-user-login-username"></label>
-                <input type="text" name="username" id="LAY-user-login-username" lay-verify="required" placeholder="用户名" class="layui-input">
+                <input type="text" name="email" id="LAY-user-login-email" lay-verify="required|email" placeholder="邮箱" class="layui-input" value="{{ old('email') }}">
             </div>
             <div class="layui-form-item">
                 <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="LAY-user-login-password"></label>
@@ -48,7 +51,7 @@
                 {{--<a href="forget.html" class="layadmin-user-jump-change layadmin-link" style="margin-top: 7px;">忘记密码？</a>--}}
             {{--</div>--}}
             <div class="layui-form-item">
-                <button class="layui-btn layui-btn-fluid" lay-submit lay-filter="LAY-user-login-submit">登 入</button>
+                <button class="layui-btn layui-btn-fluid" type="submit">登 入</button>
             </div>
             {{--<div class="layui-trans layui-form-item layadmin-user-login-other">--}}
                 {{--<label>社交账号登入</label>--}}
@@ -58,6 +61,7 @@
 
                 {{--<a href="reg.html" class="layadmin-user-jump-change layadmin-link">注册帐号</a>--}}
             {{--</div>--}}
+            </form>
         </div>
     </div>
 
@@ -89,33 +93,48 @@
 
         form.render();
 
+        @if(count($errors)>0)
+        @foreach($errors->all() as $error)
+        layer.msg("{{$error}}",{icon:5});
+        @break
+        @endforeach
+        @endif
+        //信息提示
+        @if(session('status'))
+        layer.msg("{{session('status')}}",{icon:6});
+        @endif
         //提交
-        form.on('submit(LAY-user-login-submit)', function(obj){
+        {{--form.on('submit(LAY-user-login-submit)', function(obj){--}}
 
-            //请求登入接口
-            admin.req({
-                url: "{{ route('users.login') }}" //实际使用请改成服务端真实接口
-                ,data: obj.field
-                ,done: function(res){
+            {{--//请求登入接口--}}
+            {{--admin.req({--}}
+                {{--url: "{{ route('admin.login') }}" //实际使用请改成服务端真实接口--}}
+                {{--,data: obj.field--}}
+                {{--,type: "post"--}}
+                {{--,dataTpye: "json"--}}
+                {{--,done: function(res){--}}
 
-                    //请求成功后，写入 access_token
-                    layui.data(setter.tableName, {
-                        key: setter.request.tokenName
-                        ,value: res.data.access_token
-                    });
+                    {{--if(res.errors){--}}
+                        {{--layer.msg(res.errors);--}}
+                    {{--}--}}
+                    {{--//请求成功后，写入 access_token--}}
+                    {{--layui.data(setter.tableName, {--}}
+                        {{--key: setter.request.tokenName--}}
+                        {{--,value: res.data.access_token--}}
+                    {{--});--}}
 
-                    //登入成功的提示与跳转
-                    layer.msg('登入成功', {
-                        offset: '15px'
-                        ,icon: 1
-                        ,time: 1000
-                    }, function(){
-                        location.href = '../'; //后台主页
-                    });
-                }
-            });
+                    {{--//登入成功的提示与跳转--}}
+                    {{--layer.msg('登入成功', {--}}
+                        {{--offset: '15px'--}}
+                        {{--,icon: 1--}}
+                        {{--,time: 1000--}}
+                    {{--}, function(){--}}
+                        {{--location.href = '{{ route('admin.index') }}'; //后台主页--}}
+                    {{--});--}}
+                {{--}--}}
+            {{--});--}}
 
-        });
+        {{--});--}}
 
     });
 </script>
