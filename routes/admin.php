@@ -25,8 +25,30 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => [], ]
 
 });
 
+
+/*
+ * -------------------------------------------------------------------------
+ * 后台需要认证相关路由
+ * -------------------------------------------------------------------------
+ */
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth']],function (){
+
+    //首页
     Route::get('/', 'IndexController@index')->name('admin');
     Route::get('index', 'IndexController@index')->name('admin.index');
+    //欢迎页
     Route::get('welcome', 'IndexController@welcome')->name('index.welcome');
+
+    //会员
+    Route::resource('users', 'UsersController');
+
+    //权限
+    Route::resource('permissions', 'PermissionsController');
+
+    //角色
+    Route::resource('roles', 'RolesController');
+
+    //菜单
+    Route::resource('menus', 'MenusController');
+
 });
