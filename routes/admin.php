@@ -7,6 +7,10 @@
  */
 
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin'],function (){
+    Route::get('login', 'UsersController@login')->name('users.login');
+});
+
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin'],function (){
     Route::get('/', 'IndexController@index');
     Route::get('index', 'IndexController@index');
     Route::get('welcome', 'IndexController@welcome')->name('index.welcome');
