@@ -23,21 +23,7 @@
 
     @include('admin.layouts._sidebar')
 
-    <div class="content-wrapper">
-        <div class="content-header">
-            <ul class="breadcrumb">
-                <li><a href="#"><i class="icon icon-home"></i></a></li>
-                <li><a href="#">页面演示</a></li>
-                <li class="active">用户列表</li>
-            </ul>
-        </div>
-        <div class="content-body">
-            <div class="container-fluid">
-                @include('admin.layouts._message')
-            </div>
-            @yield('content')
-        </div>
-    </div>
+    @yield('content')
 </div>
 
 <!-- jquery js -->
