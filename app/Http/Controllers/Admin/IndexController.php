@@ -11,8 +11,7 @@ class IndexController extends Controller
 
     public function index()
     {
-        $menus = Menu::get()->toTree();
-        return view('admin.index.index', compact('menus'));
+        return view('admin.index.index');
     }
 
     public function welcome()

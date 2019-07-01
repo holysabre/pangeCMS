@@ -50,5 +50,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 
     //菜单
     Route::resource('menus', 'MenusController');
+    Route::get('data', 'MenusController@data')->name('admin.menus.data');
+    Route::delete('menus/destroy', 'MenusController@destroy')->name('admin.menus.destroy');
+
+    //站点你设置
+    Route::resource('settings', 'SettingsController');
 
 });

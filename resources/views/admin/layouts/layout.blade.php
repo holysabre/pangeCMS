@@ -1,29 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
-    <title>@yield('title', 'pangeCMS')</title>
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="/layuiadmin/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="/layuiadmin/style/admin.css" media="all">
-    <link rel="stylesheet" href="/layuiadmin/style/template.css" media="all">
+    <title>@yield('title', 'PangeCMS')</title>
+    <!-- zui css -->
+    <link rel="stylesheet" href="/zui/dist/css/zui.min.css">
+    <link rel="stylesheet" href="/zui/dist/theme/blue.css">
+    <!-- app css -->
+    <link rel="stylesheet" href="/zui/css/app.css">
     @yield('styles')
+
 </head>
 <body>
 
-@yield('content')
+<div class="wrapper">
 
-<script src="/layuiadmin/layui/layui.js"></script>
-<script>
-    layui.config({
-        base: '/layuiadmin/' //静态资源所在路径
-    }).extend({
-        index: 'lib/index' //主入口模块
-    }).use(['index']);
-</script>
+    @include('admin.layouts._header')
+
+    @include('admin.layouts._sidebar')
+
+    <div class="content-wrapper">
+        <div class="content-header">
+            <ul class="breadcrumb">
+                <li><a href="#"><i class="icon icon-home"></i></a></li>
+                <li><a href="#">页面演示</a></li>
+                <li class="active">用户列表</li>
+            </ul>
+        </div>
+        <div class="content-body">
+            <div class="container-fluid">
+                @include('admin.layouts._message')
+            </div>
+            @yield('content')
+        </div>
+    </div>
+</div>
+
+<!-- jquery js -->
+<script src="/zui/dist/lib/jquery/jquery.js"></script>
+<!-- zui js -->
+<script src="/zui/dist/js/zui.min.js"></script>
+<!-- app js -->
+<script src="/zui/js/app.js"></script>
+
 @yield('scripts')
+
 </body>
 </html>

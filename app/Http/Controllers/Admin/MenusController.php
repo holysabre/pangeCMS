@@ -2,84 +2,96 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\MenuRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Menu;
 
 class MenusController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return view('admin.menus.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function data(Request $request, Menu $menu)
     {
-        //
+//        $menus = $menu->allTreeList();
+        $menus = $this->traverseTree();
+        $count = Menu::all()->count();
+        $data = [
+            'code' => 0,
+            'msg'   => '正在请求中...',
+            'count' => $count,
+            'data'  => $menus
+        ];
+        return response()->json($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function create(Menu $menu)
     {
-        //
+        $menus = $this->traverseTree();
+        $menu->order = 0;
+        return view('admin.menus.create_and_edit', compact('menu', 'menus'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
+    public function store(MenuRequest $request, Menu $menu)
+    {
+        $menu->fill($request->all());
+        $menu->save();
+
+        return redirect()->route('menus.index')->with('success', '菜单添加成功');
+    }
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function edit(Menu $menu)
     {
-        //
+        $menus = $this->traverseTree();
+        return view('admin.menus.create_and_edit', compact('menu', 'menus'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(MenuRequest $request, Menu $menu)
     {
-        //
+        $menu->update($request->all());
+
+        return redirect()->route('menus.index')->with('success', '菜单修改成功');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Menu $menu)
     {
-        //
+        dd($menu);
+//        $menu->delete();
+        $data = [
+            'code' => 0,
+            'msg'   => '正在请求中...',
+            'count' => 0,
+            'data'  => ''
+        ];
+        return response()->json($data);
+    }
+
+    public function traverseTree()
+    {
+        $trees = collect();
+        $nodes = Menu::get()->toTree();
+        $traverse = function ($categories, $prefix = '') use (&$traverse, $trees) {
+            foreach ($categories as $category) {
+//                echo PHP_EOL.$prefix.' '.$category->name;
+                $category->name_show = $prefix.' '.$category->name;
+                if(!$trees->contains($category)){
+                    $trees->push($category);
+                }
+                $traverse($category->children, $prefix.'——');
+            }
+        };
+        $traverse($nodes);
+        return $trees;
     }
 }
