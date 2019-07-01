@@ -9,8 +9,19 @@
         </div>
         <div class="panel-body">
             <div class="table-tools" style="margin-bottom: 15px;">
+                <div class="pull-right" style="width: 250px;">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="关键字">
+                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button">搜索</button>
+                                        </span>
+                    </div>
+                </div>
                 <div class="tools-group">
                     <a href="#" class="btn btn-primary"><i class="icon icon-plus-sign"></i> 新增</a>
+                    <a href="#" class="btn btn-success"><i class="icon icon-check-circle"></i> 启用</a>
+                    <a href="#" class="btn btn-warning"><i class="icon icon-ban-circle"></i> 禁用</a>
+                    <a href="#" class="btn btn-danger"><i class="icon icon-remove-sign"></i> 删除</a>
                 </div>
             </div>
             <table class="table table-bordered">

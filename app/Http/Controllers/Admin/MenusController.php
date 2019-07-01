@@ -10,23 +10,11 @@ use App\Models\Menu;
 class MenusController extends Controller
 {
 
-    public function index()
+    public function index(Request $request, Menu $menu)
     {
-        return view('admin.menus.index');
-    }
-
-    public function data(Request $request, Menu $menu)
-    {
-//        $menus = $menu->allTreeList();
         $menus = $this->traverseTree();
         $count = Menu::all()->count();
-        $data = [
-            'code' => 0,
-            'msg'   => '正在请求中...',
-            'count' => $count,
-            'data'  => $menus
-        ];
-        return response()->json($data);
+        return view('admin.menus.index', compact('menus', 'count'));
     }
 
 
@@ -66,15 +54,8 @@ class MenusController extends Controller
 
     public function destroy(Menu $menu)
     {
-        dd($menu);
-//        $menu->delete();
-        $data = [
-            'code' => 0,
-            'msg'   => '正在请求中...',
-            'count' => 0,
-            'data'  => ''
-        ];
-        return response()->json($data);
+        $menu->delete();
+        return redirect()->back()->with('success', '菜单删除成功');
     }
 
     public function traverseTree()
