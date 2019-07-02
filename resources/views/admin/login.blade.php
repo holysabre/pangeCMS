@@ -27,7 +27,7 @@
                     <input type="text" class="form-control" placeholder="邮箱" name="email" value="{{ old('email') }}">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="密码" name="password">
+                    <input type="password" class="form-control" placeholder="密码" name="password">
                 </div>
                 <div class="form-group">
                     <div class="col-sm-8">

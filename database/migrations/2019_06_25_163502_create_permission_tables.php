@@ -20,6 +20,9 @@ class CreatePermissionTables extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('guard_name');
+            $table->string('remarks');
+            $table->integer('parent_id')->default(0);
+            $table->integer('order')->default(0);
             $table->timestamps();
         });
 
@@ -27,6 +30,7 @@ class CreatePermissionTables extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('guard_name');
+            $table->string('remarks');
             $table->timestamps();
         });
 

@@ -50,10 +50,23 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 
     //菜单
     Route::resource('menus', 'MenusController');
-    Route::get('data', 'MenusController@data')->name('admin.menus.data');
-    Route::delete('menus/destroy', 'MenusController@destroy')->name('admin.menus.destroy');
 
-    //站点你设置
-    Route::resource('settings', 'SettingsController');
+    //站点设置
+    Route::resource('sites', 'SitesController');
+
+    //分类设置
+    Route::resource('categories', 'CategoriesController');
+
+    //单页设置
+    Route::resource('pages', 'PagesController');
+
+    //文章设置
+    Route::resource('articles', 'ArticlesController');
+
+    //产品设置
+    Route::resource('products', 'ProductsController');
+
+    //留言设置
+    Route::resource('messages', 'MessagesController');
 
 });
