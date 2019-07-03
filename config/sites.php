@@ -1,0 +1,1 @@
+<?phpreturn [    'section' => [        'basic' => '基本信息',        'company' => '公司信息',        'contact' => '联系信息',    ],    'type' => ['text','textarea','radio','checkbox','select','image'],];

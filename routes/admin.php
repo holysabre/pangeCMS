@@ -53,6 +53,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
 
     //站点设置
     Route::resource('sites', 'SitesController');
+    Route::post('sites/save', 'SitesController@save')->name('sites.save');
 
     //分类设置
     Route::resource('categories', 'CategoriesController');
