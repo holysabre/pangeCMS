@@ -1,7 +1,16 @@
 @extends('admin.layouts.layout')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="content-wrapper">
+        <div class="content-header">
+            <ul class="breadcrumb">
+                <li><a href="#"><i class="icon icon-home"></i></a></li>
+                <li><a href="#">后台管理</a></li>
+                <li class="active"></li>
+            </ul>
+        </div>
+        <div class="content-body">
+            <div class="container-fluid">
         <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box bg-info">
@@ -119,6 +128,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
         </div>
     </div>
 @stop

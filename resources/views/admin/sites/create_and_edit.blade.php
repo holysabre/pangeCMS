@@ -35,7 +35,7 @@
                                                 <div class="form-group">
                                                     <label for="{{ $site->key }}" class="col-md-2 col-sm-2 control-label">{{ $site->name }}</label>
                                                     <div class="col-md-5 col-sm-10">
-                                                        <input type="text" name="{{ $site->key }}" autocomplete="off" class="form-control" value="{{ $site->value }}" >
+                                                        <input type="text" name="{{ $site->id }}" autocomplete="off" class="form-control" value="{{ $site->value }}" >
                                                     </div>
                                                 </div>
                                                 @break
@@ -43,7 +43,7 @@
                                                 <div class="form-group">
                                                     <label for="{{ $site->key }}" class="col-md-2 col-sm-2 control-label">{{ $site->name }}</label>
                                                     <div class="col-md-5 col-sm-10">
-                                                        <textarea name="{{ $site->key }}" class="form-control">{{ $site->value }}</textarea>
+                                                        <textarea name="{{ $site->id }}" class="form-control">{{ $site->value }}</textarea>
                                                     </div>
                                                 </div>
                                                 @break
@@ -53,12 +53,12 @@
                                                     <div class="col-md-5 col-sm-10">
                                                         <div class="radio-inline">
                                                             <label>
-                                                                <input type="radio" name="{{ $site->key }}" value="0" {{ $site->value == 0 ? 'checked' : '' }}> 关闭
+                                                                <input type="radio" name="{{ $site->id }}" value="0" {{ $site->value == 0 ? 'checked' : '' }}> 关闭
                                                             </label>
                                                         </div>
                                                         <div class="radio-inline">
                                                             <label>
-                                                                <input type="radio" name="{{ $site->key }}" value="1" {{ $site->value == 1 ? 'checked' : '' }}> 开启
+                                                                <input type="radio" name="{{ $site->id }}" value="1" {{ $site->value == 1 ? 'checked' : '' }}> 开启
                                                             </label>
                                                         </div>
                                                     </div>

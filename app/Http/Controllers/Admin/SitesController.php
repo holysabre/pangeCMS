@@ -25,7 +25,20 @@ class SitesController extends Controller
 
     public function save(SiteRequest $request)
     {
+        $data = $request->all();
 
+        unset($data['_token']);
+
+        foreach ($data as $key => $value){
+            if($site = Site::find($key)){
+                if($site->value != $value){
+                    $site->value = $value;
+                    $site->save();
+                }
+            }
+        }
+
+        return redirect()->back()->with('success','站点信息更新成功');
     }
 
 }
