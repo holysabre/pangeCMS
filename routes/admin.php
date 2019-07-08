@@ -70,4 +70,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     //留言设置
     Route::resource('messages', 'MessagesController');
 
+    //公共
+    //文件上传
+    Route::post('common/upload', 'CommonController@upload')->name('common.upload');
+
 });

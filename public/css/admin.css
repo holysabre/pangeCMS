@@ -1,0 +1,17 @@
+.uploader-list{
+    margin: 5px 0;
+}
+.file-item{
+    display: inline-block;
+    width: 100px;
+    position: relative;
+}
+.file-item > img{
+    width: 100px;
+}
+.file-item > button.btn-delete-file{
+    position: absolute;
+    top: 0;
+    right: 0
+;
+}

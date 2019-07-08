@@ -12,8 +12,15 @@
     <link rel="stylesheet" href="/zui/dist/theme/blue.css">
     <!-- app css -->
     <link rel="stylesheet" href="/zui/css/app.css">
-    @yield('styles')
+    <link rel="stylesheet" href="/css/admin.css">
 
+    <!-- jquery js -->
+    <script src="/js/jquery.min.js"></script>
+    <script>
+        var BASE_URL = '/lib/webuploder/';
+    </script>
+
+    @yield('styles')
 </head>
 <body>
 
@@ -26,8 +33,6 @@
     @yield('content')
 </div>
 
-<!-- jquery js -->
-<script src="/zui/dist/lib/jquery/jquery.js"></script>
 <!-- zui js -->
 <script src="/zui/dist/js/zui.min.js"></script>
 <!-- app js -->
