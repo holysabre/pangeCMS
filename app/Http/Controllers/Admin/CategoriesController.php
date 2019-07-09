@@ -31,10 +31,10 @@ class CategoriesController extends Controller
     public function store(CategoryRequest $request, Category $category)
     {
         $category->fill($request->all());
-        $category->thumb = serialize($category->thumb);
+        $category->thumb = isset($category->thumb) ? serialize($category->thumb) : '';
         $category->save();
 
-        return redirect()->back()->with('success','分类添加成功');
+        return redirect()->route('categories.index')->with('success','分类添加成功');
     }
 
     /**
@@ -50,7 +50,7 @@ class CategoriesController extends Controller
 
     public function edit(Category $category)
     {
-        $category->thumb = unserialize($category->thumb);
+        $category->thumb = isset($category->thumb) ? unserialize($category->thumb) : '';
         $categories = Category::all();
         return view('admin.categories.create_and_edit', compact('category', 'categories'));
     }
@@ -59,9 +59,9 @@ class CategoriesController extends Controller
     {
 //        $this->authorize('update',$user);
         $data = $request->all();
-        $data['thumb'] = serialize($data['thumb']);
+        $data['thumb'] = isset($data['thumb']) ? serialize($data['thumb']) : '';
         $category->update($data);
-        return redirect()->back()->with('success', '分类更新成功！');
+        return redirect()->route('categories.index')->with('success', '分类更新成功！');
     }
 
     /**

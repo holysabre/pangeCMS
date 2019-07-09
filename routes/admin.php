@@ -74,4 +74,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     //文件上传
     Route::post('common/upload', 'CommonController@upload')->name('common.upload');
 
+    //会员
+    Route::resource('members', 'MembersController');
+
+    //会员角色
+    Route::resource('member_roles', 'MemberRolesController');
+
+    //会员晋升
+    Route::resource('member_promotes', 'MemberPromotesController');
+
 });

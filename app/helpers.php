@@ -133,3 +133,15 @@ function image_uploader($name,$id,$images = [],$folder = 'default')
             </div>';
     return $html;
 }
+
+
+function gen_rand_number($length)
+{
+    $number = '';
+    for ($i=1;$i<$length;$i++) {         //通过循环指定长度
+        $rand_number = mt_rand(0,9);     //指定为数字
+        $number .= $rand_number;
+    }
+
+    return $number;
+}
