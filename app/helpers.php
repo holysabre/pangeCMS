@@ -135,6 +135,11 @@ function image_uploader($name,$id,$images = [],$folder = 'default')
 }
 
 
+/**
+ * @param $length
+ * @return string
+ * 获取指定长度的随机数
+ */
 function gen_rand_number($length)
 {
     $number = '';
@@ -144,4 +149,23 @@ function gen_rand_number($length)
     }
 
     return $number;
+}
+
+/**
+ * @param $message
+ * @param int $status
+ * @param array $data
+ * @param string $url
+ * @return array
+ * 异步数据整合
+ */
+function ajax_response($message, $status = 0, $data = [], $url = '')
+{
+    $arr = [
+        'msg' => $message,
+        'status' => $status,
+        'data' => $data,
+        'url' => $url,
+    ];
+    return $arr;
 }

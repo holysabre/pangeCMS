@@ -75,7 +75,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::post('common/upload', 'CommonController@upload')->name('common.upload');
 
     //会员
+    Route::get('members/getName', 'MembersController@getName')->name('members.getName');
     Route::resource('members', 'MembersController');
+    Route::put('members/change/{member}', 'MembersController@change')->name('members.change');
+    Route::put('members/setParent/{member}', 'MembersController@setParent')->name('members.setParent');
 
     //会员角色
     Route::resource('member_roles', 'MemberRolesController');

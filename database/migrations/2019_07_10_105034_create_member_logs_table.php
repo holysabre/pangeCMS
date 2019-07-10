@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBanksTable extends Migration
+class CreateMemberLogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateBanksTable extends Migration
      */
     public function up()
     {
-        Schema::create('banks', function (Blueprint $table) {
+        Schema::create('member_logs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('member_id')->comment('会员id');
-            $table->string('owner')->comment('收款人姓名');
-            $table->bigInteger('number')->comment('卡号');
-            $table->string('name')->comment('银行名称');
-            $table->string('image_front')->comment('银行卡照片正面');
-            $table->string('image_back')->comment('银行卡照片反面');
+            $table->enum('action',['promote','freeze'])->comment('动作(审核，冻结)');
+            $table->integer('user_id')->comment('操作人id');
+            $table->string('remarks')->nullable()->comment('备注');
+            $table->string('description')->nullable()->comment('描述');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateBanksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('banks');
+        Schema::dropIfExists('member_logs');
     }
 }
