@@ -32,7 +32,7 @@ class SeedMenusData extends Migration
             [
                 "id" => "2",
                 "parent_id" => "1",
-                "name" => "用户管理",
+                "name" => "管理员管理",
                 "permission" => "manage_users",
                 "icon" => "icon-user",
                 "link" => "",

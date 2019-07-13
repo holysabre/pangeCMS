@@ -4,8 +4,8 @@
             <a class="navbar-toggle" href="javascript:;" data-toggle="collapse" data-target=".navbar-collapse"><i class="icon icon-th-large"></i></a>
             <a class="sidebar-toggle" href="javascript:;" data-toggle="push-menu"><i class="icon icon-bars"></i></a>
             <a class="navbar-brand" href="#">
-                <span class="logo">ZUIAdmin</span>
-                <span class="logo-mini">ZA</span>
+                <span class="logo">PangeAdmin</span>
+                <span class="logo-mini">Pange</span>
             </a>
         </div>
         <div class="collapse navbar-collapse">

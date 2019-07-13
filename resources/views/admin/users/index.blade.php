@@ -43,7 +43,13 @@
                                 <td>{{ $user->id }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td></td>
+                                <td>
+                                    @if($roles = $user->roles)
+                                        @foreach($roles as $role)
+                                            <span class="label label-badge label-info label-outline">{{ $role->remarks }}</span>
+                                        @endforeach
+                                    @endif
+                                </td>
                                 <td>{{ $user->created_at }}</td>
                                 <td>
                                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-xs btn-primary"><i class="far fa-edit-alt"></i>编辑</a>

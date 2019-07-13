@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Role;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RolesController extends Controller
 {
@@ -24,9 +25,10 @@ class RolesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Role $role)
     {
-        //
+        $permissions = Permission::all();
+        return view('admin.roles.create_and_edit',compact('role','permissions'));
     }
 
     /**
@@ -35,9 +37,13 @@ class RolesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Role $role)
     {
-        //
+        $data = $request->all();
+        unset($data['permission']);
+        $role->save($data);
+        $role->syncPermissions($request->permission);
+        return redirect()->route('roles.index')->with('success','新增角色成功');
     }
 
     /**
@@ -51,27 +57,20 @@ class RolesController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function edit(Role $role)
     {
-        //
+        $permissions = Permission::all();
+        return view('admin.roles.create_and_edit',compact('role','permissions'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $data = $request->all();
+        unset($data['permission']);
+        $role->update($data);
+        $role->syncPermissions($request->permission);
+        return redirect()->route('roles.index')->with('success','更新角色成功');
     }
 
     /**

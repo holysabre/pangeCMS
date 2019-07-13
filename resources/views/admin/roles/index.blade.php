@@ -43,15 +43,6 @@
                                 <td>{{ $role->remarks }}</td>
                                 <td>
                                     <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-xs btn-primary"><i class="far fa-edit-alt"></i>编辑</a>
-                                    <form action="{{ route('roles.destroy', $role->id) }}" method="post"
-                                          style="display: inline-block;"
-                                          onsubmit="return confirm('您确定要删除吗？');">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-                                        <button type="submit" class="btn btn-xs btn-danger">
-                                            <i class="far fa-trash-alt"></i> 删除
-                                        </button>
-                                    </form>
                                 </td>
                             </tr>
                         @endforeach

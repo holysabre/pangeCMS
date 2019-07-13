@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Permission;
+use Spatie\Permission\Models\Permission;
 
 class PermissionsController extends Controller
 {
@@ -24,20 +24,16 @@ class PermissionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Permission $permission)
     {
-        //
+        return view('admin.permissions.create_and_edit',compact('permission'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(Request $request, Permission $permission)
     {
-        //
+        $permission->fill($request->all());
+        $permission->save();
+        return redirect()->route('permissions.index')->with('success','更新权限成功');
     }
 
     /**
@@ -51,37 +47,24 @@ class PermissionsController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function edit(Permission $permission)
     {
-        //
+        return view('admin.permissions.create_and_edit',compact('permission'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(Request $request, Permission $permission)
     {
-        //
+        $permission->fill($request->all());
+        $permission->save();
+        Permission::findOrCreate($permission->name,$permission->guard_name?:null,$permission->remarks);
+        return redirect()->route('permissions.index')->with('success','更新权限成功');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(Permission $permission)
     {
-        //
+        $permission->delete();
+        $permission->forgetCachedPermissions();
+        return redirect()->back()->with('success','删除权限成功');
     }
 }

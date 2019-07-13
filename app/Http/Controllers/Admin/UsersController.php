@@ -5,6 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Hash;
+use Auth;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use App\Models\Menu;
 
 class UsersController extends Controller
 {
@@ -20,25 +26,20 @@ class UsersController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(User $user)
     {
-        //
+//        dump(Auth::user());
+        return view('admin.users.create_and_edit', compact('user'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function store(UserRequest $request, User $user)
     {
-        //
+        $user->fill($request->all());
+        $user->password = Hash::make($user->password);
+        $user->save();
+        $user->syncRoles($request->role);
+        return redirect()->route('users.index')->with('success','新增管理员成功');
     }
 
     /**
@@ -52,27 +53,24 @@ class UsersController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function edit(User $user)
     {
-        //
+//        dump($user->hasPermissionTo('manage_users'));
+
+        $roles = Role::all();
+        return view('admin.users.create_and_edit', compact('user','roles'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $data = $request->all();
+
+        $data['password'] = empty($request->password) ? $user->password : Hash::make($request->password);
+        $user->update($data);
+        $user->syncRoles($request->role);
+        return redirect()->route('users.index')->with('success','更新管理员成功');
     }
 
     /**
@@ -81,8 +79,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->back()->with('success','删除管理员成功');
     }
 }
