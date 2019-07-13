@@ -15,4 +15,9 @@ return [
         'active' => '活跃',
         'freeze' => '冻结',
     ],
+    'group' => [
+        'director' => '执行董事',
+        'manager' => '经理',
+        'other' => '其他',
+    ],
 ];

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMemberRolesTable extends Migration
+class CreateEncouragementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateMemberRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('member_roles', function (Blueprint $table) {
+        Schema::create('encouragements', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->comment('角色名称');
-            $table->integer('score')->comment('积分');
-            $table->string('group')->default('other')->comment('分组');
+            $table->integer('member_role_id')->comment('会员角色');
+            $table->integer('reward')->comment('奖励金额');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateMemberRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('member_roles');
+        Schema::dropIfExists('encouragements');
     }
 }

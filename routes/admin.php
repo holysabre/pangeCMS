@@ -86,4 +86,10 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     //会员晋升
     Route::resource('member_promotes', 'MemberPromotesController');
 
+    //返佣制度
+    Route::resource('rebates', 'RebatesController');
+
+    //首单鼓励制度
+    Route::resource('encouragements', 'EncouragementsController');
+
 });
