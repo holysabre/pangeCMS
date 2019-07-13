@@ -53,7 +53,6 @@ class UsersController extends Controller
         //
     }
 
-
     public function edit(User $user)
     {
 //        dump($user->hasPermissionTo('manage_users'));
@@ -62,7 +61,6 @@ class UsersController extends Controller
         return view('admin.users.create_and_edit', compact('user','roles'));
     }
 
-
     public function update(UserRequest $request, User $user)
     {
         $data = $request->all();
@@ -70,15 +68,9 @@ class UsersController extends Controller
         $data['password'] = empty($request->password) ? $user->password : Hash::make($request->password);
         $user->update($data);
         $user->syncRoles($request->role);
-        return redirect()->route('users.index')->with('success','更新管理员成功');
+        return redirect()->back()->with('success','更新管理员成功');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(User $user)
     {
         $user->delete();

@@ -40,7 +40,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['aut
     Route::get('welcome', 'IndexController@welcome')->name('index.welcome');
 
     //会员
-    Route::resource('users', 'UsersController');
+    Route::resource('users', 'UsersController')->middleware(['role:Maintainer','permission:manage_users']);
 
     //权限
     Route::resource('permissions', 'PermissionsController');

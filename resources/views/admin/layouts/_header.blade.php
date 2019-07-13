@@ -33,7 +33,7 @@
                     <li class="dropdown">
                         <a href="javascript:;" data-toggle="dropdown"><i class="icon icon-user"></i> 管理员 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">资料设置</a></li>
+                            <li><a href="{{ route('users.edit', Auth::id()) }}">资料设置</a></li>
                             <li><a href="#">清除缓存</a></li>
                             <li class="divider"></li>
                             <li><a href="{{ route('admin.logout') }}">注销</a></li>

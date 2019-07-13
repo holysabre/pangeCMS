@@ -40,6 +40,8 @@
                             </div>
                         </div>
 
+                        @role('Maintainer')
+
                         <div class="form-group">
                             <label for="role" class="col-md-2 col-sm-2 control-label">角色</label>
                             <div class="col-md-5 col-sm-10">
@@ -51,6 +53,8 @@
                                 </div>
                             </div>
                         </div>
+
+                        @endrole
 
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-5 col-sm-10">
