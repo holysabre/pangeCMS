@@ -13,7 +13,7 @@
         "fideloper/proxy": "^4.0",
         "hieu-le/active": "~3.5",
         "kalnoy/nestedset": "^4.3",
-        "laravel/framework": "5.7.*",
+        "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "mews/captcha": "~2.0",
         "spatie/laravel-permission": "~2.29"
